@@ -57,6 +57,8 @@ public class ProjectServiceImpl implements ProjectService {
                 .orElseThrow(
                         () -> new ProjectNotFoundException("El proyecto con el ID: " + id + " no ha sido encontrado."));
 
+        // Existe un proyecto con esta URL?? y La URL que estoy enviando es diferente al
+        // proyecto encontrado
         if (projectRepository.existsByUrlProject(projectRequestDTO.getUrlProject())
                 && !projectEntity.getUrlProject().equals(projectRequestDTO.getUrlProject())) {
             throw new UrlProjectAlreadyUsedException("La URL que has ingresado ya está en uso.");

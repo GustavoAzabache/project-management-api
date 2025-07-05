@@ -34,13 +34,22 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<CustomErrorResponse> handlerValidationsErrors(MethodArgumentNotValidException ex) {
+    public ResponseEntity<CustomErrorResponse> handlerValidationsError(MethodArgumentNotValidException ex) {
         CustomErrorResponse error = new CustomErrorResponse(
                 HttpStatus.BAD_REQUEST.value(),
                 "SOLICITUD INCORRECTA",
                 ex.getMessage());
 
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<CustomErrorResponse> handleGenericException(Exception ex) {
+        CustomErrorResponse error = new CustomErrorResponse(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "Error inesperado",
+                ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }
