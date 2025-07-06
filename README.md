@@ -1,6 +1,17 @@
 # Project Management API
 
-API RESTful para la gestión de proyectos, construida con **Spring Boot 3.4,5**, enfocada en una arquitectura limpia por capas, uso de DTOs, mapeo con MapStruct y manejo centralizado de excepciones. No incluye frontend, está pensada como servicio backend puro.
+API RESTful para la gestión de proyectos, construida con Spring Boot, enfocada en una arquitectura limpia por capas, uso de DTOs, mapeo con MapStruct y manejo centralizado de excepciones. No incluye frontend, está pensada como servicio backend puro.
+
+---
+
+## 🧩 Características
+
+- Autenticación con Basic Auth
+- Validación de datos con Jakarta Validation
+- Manejo global de errores (`@ControllerAdvice`)
+- Seguridad con Spring Security
+- CRUD para Usuarios y Publicaciones
+- Asociación de publicaciones a un usuario
 
 ---
 
@@ -8,11 +19,9 @@ API RESTful para la gestión de proyectos, construida con **Spring Boot 3.4,5**,
 
 - Java 21
 - Spring Boot 3.4.5
-- Spring Web
-- Spring Validation
-- Spring Data JPA
-- Lombok
 - Spring Security 6
+- JPA / Hibernate
+- Lombok
 - MapStruct
 - MySQL
 
@@ -37,17 +46,43 @@ src
 
 ---
 
-🔧 Funcionalidades
 
-  - CRUD de proyectos.
+## ⚙️ Instalación
 
-  - Validación de datos con @Valid y mensajes claros.
-  
-  - Manejo global de errores con @ControllerAdvice y @ExceptionHandler.
+```bash
+git clone https://github.com/GustavoAzabache/project-management-api.git
+cd project-management-api
+./mvn spring-boot:run
+```
 
-  - Mapeo automático entre entidades y DTOs usando MapStruct.
+---
 
-  - Arquitectura desacoplada: controller ↔ service ↔ repository.
+## 🔗 Endpoints
+
+### 📃 Proyectos (Projects)
+| Método | Ruta                  | Descripción                   | Autenticación  |
+|--------|-----------------------|-------------------------------|----------------|
+| GET    | `/api/projects`       | Listar todos los projects     | ❌ No          |
+| GET    | `/api/projects/{id}`  | Obtener project por ID        | ❌ No          |
+| POST   | `/api/admin`          | Crear nuevo project           | ✅ Sí          |
+| PUT    | `/api/admin/{id}`     | Actualizar project            | ✅ Sí          |
+| DELETE | `/api/admin/{id}`     | Eliminar project              | ✅ Sí          |
+
+---
+
+## 🔐 Credenciales de prueba
+
+| Usuario  | Contraseña  |
+|----------|-------------|
+|  `admin` | `useradmin` |
+
+---
+
+## ⚠️ Manejo de errores
+
+- `404 NOT FOUND`: Project no existe
+- `409 CONFLICT`: URL de project ya en uso
+- `400 BAD REQUEST`: Datos inválidos en la solicitud
 
 ---
 
@@ -63,34 +98,3 @@ Cuando buscas un trabajo que no existe:
   "timestamp": "2025-05-19T00:53:24.436859502"
 }
 ```
-
----
-
-🛠️ Requisitos
-
-  - Java 21
-
-  - MySQL
-
----
-
-▶️ Cómo ejecutar el proyecto
-
-git clone https://github.com/tuusuario/project-management-api.git
-cd project-management-api
-./mvn spring-boot:run
-
-Para usar MySQL, asegúrate de configurar tu application.properties.
-
----
-## URL del servidor http://www.localhost:8080/api/projects
-
-🔄 Endpoints principales sin autenticación
-- GET	Listar todos los proyectos
-- GET	/{id}	Obtener un proyecto por ID
-
-🔄 Endpoints principales con autenticación
-- POST	Crear nuevo proyecto
-- PUT	/{id}	Actualizar un proyecto
-- DELETE	/{id}	Eliminar un proyecto
----
