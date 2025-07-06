@@ -74,7 +74,7 @@ cd project-management-api
 
 | Usuario  | Contraseña  |
 |----------|-------------|
-|  `admin` | `useradmin` |
+|  `admin` | `admin` |
 
 ---
 
